@@ -13,14 +13,14 @@
 ## DEFAULT_CHECK_INTERVAL
 * The interval in seconds that the program will poll the Osu! api for updates.
 ## USERS
-* This is an array of [user](##user) objects.
+* This is an array of [User](##user) objects.
 ## User
 ## id (required)
 * The osu id of the user (i.e. the numbers at the end of their website profile)
 ## webhookUrl (required)
 * The discord webhook url to post the embed to.
 ## interval (optional)
-* The interval for this specific user (overiddes [this](##default-check-interval))
+* The interval for this specific user (overiddes [DEFAULT_CHECK_INTERVAL](##default-check-interval))
 
 # Questions and Suggestions
 * Dm Tare#3664 on discord
