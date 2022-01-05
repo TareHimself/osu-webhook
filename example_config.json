@@ -1,0 +1,13 @@
+{
+    "OSU_CLIENT_ID" : "YOUR OSU CLIENT ID",
+    "OSU_CLIENT_SECRETE" : "YOUR OSU CLIENT SECRETE",
+    "OSU_API" : "https://osu.ppy.sh/api/v2",
+    "OSU_API_AUTH" : "https://osu.ppy.sh/oauth/token",
+    "DEFAULT_CHECK_INTERVAL" : 30,
+    "USERS" : [
+        {
+            "id" : "A USER ID TO TRACK",
+            "webhookUrl" : "DISCORD WEBHOOK URL TO POST THE DATA TO"
+        }
+    ]
+}
