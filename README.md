@@ -9,7 +9,7 @@
 
 # Config.json Guide
 ## OSU_CLIENT_ID and OSU_CLIENT_SECRETE
-* You have to use your own api values or get some [here.]:https://osu.ppy.sh/p/api
+* You have to use your own api values or get some [here.](https://osu.ppy.sh/p/api)
 ## DEFAULT_CHECK_INTERVAL
 * The interval in seconds that the program will poll the Osu! api for updates.
 ## USERS
