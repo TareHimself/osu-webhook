@@ -5,36 +5,13 @@ const axios = require('axios');
 
 module.exports = class UserApiHandler {
 
-    constructor(osuId, webhookUrl, checkInterval, latestPostTimestamp = undefined) {
+    constructor(osuId, webhookHandler, checkInterval, latestPostTimestamp = undefined) {
         this.osuId = osuId;
-        this.webhookUrl = webhookUrl;
+        this.webhookHandler = webhookHandler;
         this.latestPostTimestamp = latestPostTimestamp;
         this.checkInterval = checkInterval;
         this.fetchAndParseData();
     }
-
-    async convertAndPostRecentsInOrder(recents) {
-        if (recents.length === 0) return;
-
-        const recent = recents.pop();
-        const match = recent.beatmap.url.match(beatmapRegex);
-
-        const embed = {};
-
-        embed.title = `${recent.user.username} | ${recent.beatmapset.title} **${recent.beatmap.difficulty_rating}***`;
-        embed.description = `Rank **${recent.rank}** | Accuracy **${(recent.accuracy * 100).toFixed(2)}%** | Combo **${recent.max_combo}**`;
-
-        embed.url = recent.beatmap.url;
-
-        embed.image = {
-            url: recent.beatmapset.covers.cover
-        };
-
-        await axios.post(this.webhookUrl, { embeds: [embed] });
-
-        this.convertAndPostRecentsInOrder(recents);
-    }
-
 
 
     async fetchAndParseData() {
@@ -68,8 +45,24 @@ module.exports = class UserApiHandler {
 
             log(`Posting ${recents.length} new activities for user ${this.osuId}, Checking again in ${this.checkInterval} seconds`);
 
-            // post all the recents in order
-            this.convertAndPostRecentsInOrder(recents);
+            recents.map(recent => {
+                const match = recent.beatmap.url.match(beatmapRegex);
+
+                const embed = {};
+
+                embed.title = `${recent.user.username} | ${recent.beatmapset.title} **${recent.beatmap.difficulty_rating}***`;
+                embed.description = `Rank **${recent.rank}** | Accuracy **${(recent.accuracy * 100).toFixed(2)}%** | Combo **${recent.max_combo}**`;
+
+                embed.url = recent.beatmap.url;
+
+                embed.image = {
+                    url: recent.beatmapset.covers.cover
+                };
+
+                // post all the recents in order
+                owner.webhookHandler.postWebhookPayload({ embeds: [embed] })
+            });
+            
 
             setTimeout(this.fetchAndParseData.bind(this), this.checkInterval * 1000);
 
