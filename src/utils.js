@@ -1,4 +1,7 @@
 const axios = require('axios');
+const util = require('util')
+
+const logStream = require('fs').createWriteStream('./main.log', {flags: 'a'});
 
 function time(sep = '') {
 
@@ -29,7 +32,9 @@ function log(data) {
 
     argumentValues.unshift(`${time(':')} ::`);
 
-    console.log.apply(null,argumentValues);
+    const logString = util.format.apply(null,argumentValues);
+    logStream.write(logString + '\n');
+    console.log(logString);
 }
 
 async function getOsuApiToken() {
@@ -54,3 +59,5 @@ global.log = log;
 module.exports.getOsuApiToken = getOsuApiToken;
 
 log('Utils Module Loaded');
+
+
