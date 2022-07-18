@@ -1,5 +1,5 @@
 # An automatic osu webhook for discord
-* Posts recently played maps of users specified in the config at a specified discord webhook.
+* Posts recently played [osu](https://osu.ppy.sh/home) maps of users specified in the config at a specified [discord webhook](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
 
 # How to use
 * Install NodeJs (duhhh),
