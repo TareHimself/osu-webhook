@@ -77,13 +77,15 @@ export default class OsuApiUser {
 			);
 
 			recents.map((recent) => {
-				const match = recent.beatmap.url.match(beatmapRegex);
-				console.info('MODS', recent.mods);
 				const embed: IDiscordEmbed = {
 					title: `${recent.user.username} | ${recent.beatmapset.title} **${recent.beatmap.difficulty_rating}***`,
 					description: `Rank **${recent.rank}** | Accuracy **${(
 						recent.accuracy * 100
-					).toFixed(2)}%** | Combo **${recent.max_combo}** | ${recent.mods}`,
+					).toFixed(2)}%** | Combo **${recent.max_combo}** | ${
+						recent.mods.length > 0
+							? 'Mods ' + recent.mods.map((a) => `**${a}**`).join(' ')
+							: 'No Mods'
+					}`,
 					url: recent.beatmap.url,
 					image: {
 						url: recent.beatmapset.covers.cover,

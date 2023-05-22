@@ -12,7 +12,7 @@ export interface IWebhookPayload {
 export interface IOsuUserScore {
 	id: string;
 	accuracy: number;
-	mods: any;
+	mods: string[];
 	score: any;
 	rank: any;
 	user: {
