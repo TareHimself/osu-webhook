@@ -75,3 +75,4 @@ config.json
 # FuseBox cache
 .fusebox/
 checkpoints
+./dist
